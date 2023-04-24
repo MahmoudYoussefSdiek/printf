@@ -56,6 +56,7 @@ int print_string(char *string)
  */
 int _printf(const char *format, ...)
 {
+	char buffer[1024];
 	va_list arg_list;
 	int index = 0, printed_len = 0;
 
