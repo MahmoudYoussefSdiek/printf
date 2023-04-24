@@ -1,6 +1,19 @@
 #include "main.h"
 
 /**
+ * int_to_string - function that take int and save it in array as string.
+ *
+ * @number: number that we will save it as string.
+ * @buffer: array that we will save the string.
+ *
+ * Return: void.
+ */
+void int_to_string(int number, char *buffer)
+{
+	sprintf(buffer, "%d", number);
+}
+
+/**
  * print_char - function that prints a character to standard output.
  *
  * @character: the character that we will print.
@@ -44,14 +57,12 @@ int print_string(char *string)
 int _printf(const char *format, ...)
 {
 	va_list arg_list;
-	int index = 0;
-	int printed_len = 0;
+	int index = 0, int printed_len = 0;
 
 	if (format == NULL)
 		return (-1);
 
 	va_start(arg_list, format);
-
 	while (format[index] != '\0')
 	{
 		if (format[index] == '%')
@@ -68,6 +79,11 @@ int _printf(const char *format, ...)
 				case '%':
 					printed_len += print_char('%');
 					break;
+				case 'd':
+				case 'i':
+					int_to_string(va_arg(arg_list, int), buffer);
+					printed_len += print_string(buffer);
+					break;
 				default:
 					return (-1);
 			}
@@ -76,7 +92,6 @@ int _printf(const char *format, ...)
 			printed_len += print_char(format[index]);
 		index++;
 	}
-
 	va_end(arg_list);
 	return (printed_len);
 }
