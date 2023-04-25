@@ -6,5 +6,8 @@
 #include <stdio.h>
 
 int _printf(const char *format, ...);
+int print_char(char character);
+int print_string(char *string);
+void int_to_string(int number, char *buffer);
 
 #endif
