@@ -19,7 +19,7 @@ int _printf(const char *format, ...)
 	va_start(arg_list, format);
 	while (format[index] != '\0')
 	{
-		if (format[index] == '%')
+		if (format[index] == '%' && format[index + 1] != '\0')
 		{
 			index++;
 			switch (format[index])
@@ -39,7 +39,8 @@ int _printf(const char *format, ...)
 					printed_len += print_string(buffer);
 					break;
 				default:
-					return (-1);
+					printed_len += print_char(format[index - 1]);
+					printed_len += print_char(format[index]);
 			}
 		}
 		else
